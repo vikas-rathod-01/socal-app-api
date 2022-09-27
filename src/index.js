@@ -4,11 +4,12 @@ require("dotenv").config();
 const app = express();
 
 const databaseConn = require("./utils/databaseConn");
-const authentication = require("./routes/authentication");
 
 /* Routes */
+const authentication = require("./routes/authentication");
 const user = require("./routes/user");
 const post = require("./routes/post");
+
 
 /* Middlewares */
 app.use(helmet());
@@ -18,11 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 /* Request and Response Logs */
 app.use((req, res, next) => {
   console.log(
-    `Incoming Method->: [${req.method} - Url:[${req.originalUrl}] - IP:[${req.socket.remoteAddress}] `
+    `Incoming Method->: [${req.method} - Url:[${req.originalUrl}]  `
   );
   res.on("finish", () => {
     console.log(
-      `Outgoing Method->: [${req.method} - Url:[${req.originalUrl}] - IP:[${req.socket.remoteAddress}] - Status: [${res.statusCode}] `
+      `Outgoing Method->: [${req.method} - Url:[${req.originalUrl}]  - Status: [${res.statusCode}] `
     );
     console.log(" ");
   });
@@ -33,17 +34,6 @@ app.use((req, res, next) => {
 app.use("/auth", authentication);
 app.use("/user", user);
 app.use("/post", post);
-
-/* Ping Route */
-app.get("/ping", (req, res, next) => {
-  res.status(200).json({ message: "Server is running Properly!" });
-});
-
-/* Error Handling */
-app.use((req, res, next) => {
-  const error = new Error("No Route Found");
-  return res.status(400).json({ message: error.message });
-});
 
 /* Starting Server */
 try {

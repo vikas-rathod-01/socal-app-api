@@ -12,8 +12,8 @@ module.exports = async (req, res) => {
     const newPostData = await new Post({
       caption: caption,
       image: {
-        public_id: "public_id",
-        url: "url",
+        public_id: image.public_id,
+        url: image.url,
       },
       owner: req.userId,
     });
