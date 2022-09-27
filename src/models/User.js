@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
       public_id: String,
       url: String,
     },
-    posts: [
+    posts: [ 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
@@ -44,7 +44,6 @@ const userSchema = new mongoose.Schema(
 
     jwtToken: [String],
 
-    // friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { versionKey: false, timestamps: true }
 );

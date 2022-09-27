@@ -13,10 +13,10 @@ module.exports = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    /* Deleting Post */
+ 
     await post.remove();
 
-    /* Deleting Post from User */
+ 
     const index = user.posts.indexOf(req.params.id);
     user.posts.splice(index, 1);
     await user.save();
